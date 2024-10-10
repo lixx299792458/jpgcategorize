@@ -1,16 +1,25 @@
-# This is a sample Python script.
+import exifread
+import re
+import os
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# 遍历所有文件，得到所有路径
+dir_name = "可见光"
+dir_files = []
+for root,dirs,files in os.walk(dir_name):
+    for f in files:
+        dir_files.append(os.path.join(root,f))
+
+# 逐个提取文件GPS信息，进行对比，符合要求的，重新命名。
+for dir_file in dir_files:
+    # 打开图片并提取相关GPS信息
+    f = open(dir_file,'rb')
+    contents = exifread.process_file(f)
+    latitude_infos = contents['GPS GPSLatitude'].printable.replace('[','').replace(']','').replace(' ','').split(',')
+    longitude_infos = contents['GPS GPSLongitude'].printable.replace('[','').replace(']','').replace(' ','').split(',')
+    latitude = float(latitude_infos[0]) + float(latitude_infos[1]) / 60.0 + float(latitude_infos[2].split('/')[0]) / float(latitude_infos[2].split('/')[1]) / 3600.0
+    longitude = float(longitude_infos[0]) + float(longitude_infos[1]) / 60.0 + float(longitude_infos[2].split('/')[0]) / float(longitude_infos[2].split('/')[1]) / 3600.0
+    coordinate = (longitude,latitude)
+    print(dir_file,coordinate)
+    # 遍历现有词典记性对比，如果满足距离要求，则建立文件夹并将照片剪切走。
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
