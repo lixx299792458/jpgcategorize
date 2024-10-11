@@ -21,5 +21,5 @@ for dir_file in dir_files:
             coordinate = re.findall('<mis:shootingPointCoordinates>(.*?)</mis:shootingPointCoordinates>',waypoint,re.S)[0]
             # print(coordinate)
             #得到数据后，添加到字典
-            dict_item = "\"" + cable_name + dir_file.split('\\')[2].split('.')[0] + "杆" +"\":(" + coordinate.split(',')[0] + "," +coordinate.split(',')[1] + "),"
+            dict_item = "\"" + cable_name + dir_file.split('\\')[2].split('.')[0] + "杆" +"\":(" + coordinate.split(',')[1] + "," +coordinate.split(',')[0] + "),"
             print(dict_item)

@@ -1,0 +1,3 @@
+{
+"threshold_distance": 10,
+}
