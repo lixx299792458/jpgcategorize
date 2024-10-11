@@ -51,14 +51,14 @@ if __name__ == '__main__':
     # 直接试图读取txt文件，失败就报错
     pre_check = 0
     try:
-        fr = open("coordinate_dict.txt", 'r+', encoding='utf-8')
+        fr = open(os.getcwd() + "\\coordinate_dict.txt", 'r+', encoding='utf-8')
         coordinates_dict = eval(fr.read())
     except:
         pre_check = 1
         showinfo(title="错误提示", message="杆塔坐标字典不存在")
     # 直接试图读取设置文件，失败就报错
     try:
-        fr = open("threshold_distance.txt", 'r+', encoding='utf-8')
+        fr = open(os.getcwd() + "\\threshold_distance.txt", 'r+', encoding='utf-8')
         threshold_distance_dict = eval(fr.read())
         threshold_distance = threshold_distance_dict['threshold_distance']
     except:
