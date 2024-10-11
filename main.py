@@ -40,7 +40,7 @@ def jpgcategorize(pathin, pathout, coordinates_dict, threshold_distance):
                 if not os.path.exists(new_dir):
                     os.mkdir(new_dir)
                 try:
-                    new_file= pathout + '\\' + key + '\\' + dir_file.split('\\')[-1].split('.')[0] + '----' + pic_timestamp + '.' + dir_file.split('\\')[-1].split('.')[1]
+                    new_file= pathout + '\\' + key + '\\' + dir_file.split('\\')[-1].split('.')[0] + '-targetdistance-' + str(distance)[:4] + 'm-shottime-' + pic_timestamp + '.' + dir_file.split('\\')[-1].split('.')[1]
                     if not os.path.exists(new_file):
                         shutil.move(dir_file, new_file)
                 except:
